@@ -17,10 +17,15 @@ for i in range(len(ls)):
     if len(ls[i])> max_ls:
         max_ls = len(ls[i])
 print(max_ls)
+#max_ls = len (max(ls, key = len))
 
 for i in range(len(ls)):
     # print(ls[i].rjust(max_ls+1, ' '))
     print('{}{}'.format(str(i+1)+'.', ls[i].rjust(max_ls+1, ' ')))
+
+#или
+for index, item in enumerate(ls, start=1):
+    print(index, item)
 
 # Задача-2:
 # Даны два произвольные списка.
@@ -30,7 +35,7 @@ b = ['a', 'b', 'c', 'd', '1', '2']
 a = ['b', 'd', '2', '5']
 с = []
 for i in b:
-    if i in a:
+    if i in a: #while лучше если есть повторы
       a.remove(i)
 
 print('из a убрали элементы b = {}'.format(a))
