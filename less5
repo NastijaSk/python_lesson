@@ -1,0 +1,66 @@
+'''
+
+                            Online Python Interpreter.
+                Code, Compile, Run and Debug python program online.
+Write your code in this editor and press "Run" button to execute it.
+
+'''
+
+import shutil
+import sys
+import os
+
+print(sys.argv[0])
+
+print(os.name)
+print('os.getcwd() = ', os.getcwd())
+print(os.path)
+
+
+
+def goto_in_dir():
+    os.chdir(path)
+    
+def info_dir():
+    print('info_dir: ' , os.listdir(path="."))
+
+def new_dir(name_dir):
+    try:
+        os.mkdir(name_dir)
+        print(os.path.isdir(name_dir))
+        if os.path.isdir(name_dir) :
+            print('Папка создана')
+        else:
+            print('Папки не было, и не создана')
+    except FileExistsError:
+        print('Папка уже есть')
+def remove_dir( name_dir ):
+    try:
+        os.rmdir(name_dir)
+        # shutil.rmtree(name_dir)
+        if os.path.isdir(name_dir) is False:
+            print('Папка удалена')
+        else:
+            print('Папка была, но почему-то не удалилась')
+    except FileNotFoundError:
+        print('Папки для удаления нет')
+
+info_dir()
+        
+print(os.listdir(path="."))
+print(os.getcwd())
+
+new_dir("test")
+os.chdir('./test')
+print('в подпапке: ', os.listdir(path="."))
+print(os.getcwd())
+
+# new_dir("test")
+new_dir("test")
+new_dir("test")
+
+print(os.listdir(path="."))
+
+remove_dir('test')
+remove_dir('test')
+print(os.listdir(path="."))
