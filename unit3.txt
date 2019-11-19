@@ -1,0 +1,46 @@
+#python 3.5.2
+
+# Задание - 1
+# Вам даны 2 списка одинаковой длины, в первом списке имена людей, во втором зарплаты,
+# вам необходимо получить на выходе словарь, где ключ - имя, значение - зарплата.
+
+
+names = ['Ivan' , 'Petr', 'Olga', 'Maksim', 'Sveta']
+money = [100000, 179000, 78000, 510000, 99000]
+
+name_money = dict(zip(names, money))
+print(name_money)
+
+# Запишите результаты в файл salary.txt так, чтобы на каждой строке было 2 столбца,
+# столбцы разделяются пробелом, тире, пробелом. в первом имя, во втором зарплата, например: Vasya - 5000
+print(name_money.values())
+
+def func_in_file( *args):   
+    pr = ''
+    l = args[0]
+    for key, val in l.items(): 
+        if val <=500000:
+            pr += '{} - {}\n'.format(key, val)
+    return pr
+
+
+    
+#print ('Vasya - 5000'.split(' - ')[1])
+#print(func_in_file(name_money))
+with open('salary.txt', 'w', encoding = 'utf-8') as file:
+    for key, val in name_money.items():
+        file.write('{} - {}\n'.format(key, val))
+        ##file.write(func_in_file(name_money))
+     
+    
+#file = open('salary.txt', 'r')
+#for l in file:
+#   key, val = l.split(' - ')
+#   if val<=5000000:
+    #   print(upper(key), val*0.87)
+#file.close()
+
+
+
+    
+    

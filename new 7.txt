@@ -1,0 +1,73 @@
+#clients
+
+def process_ans(message):
+    '''
+    Функция разбирает ответ сервера
+    :param message:
+    :return:
+    '''
+    if RESPONSE in message:
+        if message[RESPONSE] == 200:
+            return '200 : OK'
+        return f'400 : {message[ERROR]}'
+    raise ValueError
+	
+	
+#функция авторизации
+def create_autorisation(login = 'not', passw = 'not'):
+	out = {
+	
+		ACTION: AUTORISATION,
+		TIME: time.time(),
+		TYPE: connect,
+		USER: {
+			LOGIN: login,
+			PASSWORD: passw}
+	}
+	return out
+	
+def create_presence(account_name='Guest'):
+    '''
+    Функция генерирует запрос о присутствии клиента
+    :param account_name:
+    :return:
+    '''
+    out = {
+        ACTION: PRESENCE,
+        TIME: time.time(),
+        USER: {
+            ACCOUNT_NAME: account_name
+        }
+    }
+    return out
+	
+	
+	
+def main():
+	try:
+		server_addr = sys.argv[1]
+		server_port = int(sys.argv[2])
+		if server_port < 1024 or server_port > 65535:
+			raise ValueError
+	except IndexError:
+        server_address = DEFAULT_IP_ADDRESS
+        server_port = DEFAULT_PORT
+    except ValueError:
+        print('Порт указан неверно')
+        sys.exit(1)
+		
+		SOCKET = socket(AF_INET, SOCK.STREAM)
+		SOCKET.connect((server_addr, server_port))
+		message_to_server = create_autorisation('admin', '1234567890')
+		
+		send_message(SOCKET, message_to_server)
+		
+		try:
+			answer = answer = process_ans(get_message(SOCKET))
+			print(answer)
+		except (ValueError, json.JSONDecodeError):
+			print('Не удалось декодировать сообщение сервера.')
+			
+if __name__ == '__main__':
+    main()			
+			
